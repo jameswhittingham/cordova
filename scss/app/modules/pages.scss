@@ -1,0 +1,45 @@
+//
+// Page specific styles
+// --------------------------------------------------
+
+.page {
+	padding-top: 20px;
+	
+	&.home {
+		margin-top: 20%;
+	}
+
+	h1 {
+		margin-top: 25px;
+	}
+}
+
+
+.drop-area {
+	padding-top: 100%;
+}
+
+.names-container {
+	left: 0;
+	padding-top: 75px;
+	position: absolute;
+	text-align: center;
+	top: 0;
+	width: 100%;
+}
+
+.interactive-container {
+	float: left;
+	width: 100%;
+}
+
+.draggable-item {
+	background-color: #387ef5;
+	padding-top: 100%;
+	position: absolute;
+	z-index: 1;
+
+	&.transition {
+		@include transition(.2s ease-in-out  all);
+	}
+}

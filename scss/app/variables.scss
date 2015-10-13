@@ -1,0 +1,71 @@
+/*
+//
+// Variables
+// --------------------------------------------------
+
+
+// Colors
+// --------------------------------------------------
+
+//--Greys variants
+$grey: 						#3d3d3c;
+$grey-variant:				#5b5f5f;
+$grey-variant-2:			#787878;
+$grey-variant-3: 			#8c8d87;
+
+$grey-variant-4:			#48494b;
+$grey-variant-5:			#989a9d;
+$grey-variant-6: 			#f0f1f1;
+
+//--Brand colors
+$brand-primary: 			$grey-variant-4;
+$brand-primary-variant: 	$grey-variant-5;
+
+$color-online: 				$grey-variant-4;
+$color-connect: 			#007336;
+$color-ms: 					#7e317b;
+$color-pompe: 				#70a101;
+$color-thyroid: 			#872631;
+$color-fabry: 				#db5d06;
+$color-gaucher: 			#eab200;
+$color-mps: 				#2f4f88;
+$color-nav: 				#bbb600;
+
+
+
+//--Backgrounds colors
+$body-bg: 					#fff;
+
+//--Typography colors
+$text-color: 				#48494b;
+$link-color: 				$color-nav; // should this be @brand-primary for TA's?
+
+
+// Fonts
+// --------------------------------------------------
+$font-family-guidelines: 			Arial, Helvetica, sans-serif;
+$font-family-buttons: 				'Dosis', sans-serif;
+
+$font-family-serif: 				'open-baskerville', Helvetica, sans-serif;
+$font-family-sans-serif:  			'tex-gyre-adventor-regular', Helvetica, sans-serif;
+$font-family-sans-serif-italic:  	'tex-gyre-adventor-italic', Helvetica, sans-serif;
+$font-family-sans-serif-bold:  		'tex-gyre-adventor-bold', Helvetica, sans-serif;
+$font-family-sans-serif-bolditalic: 'tex-gyre-adventor-bolditalic', Helvetica, sans-serif;
+
+
+// Media queries breakpoints
+// --------------------------------------------------
+
+//--Breakpoints
+$screen-xs-min: 			375px;
+$screen-xxs-max: 			($screen-xs-min - 1);
+
+$grid-columns:              12;
+$grid-gutter-width:         25px;
+$container-large-desktop:   (1080px + $grid-gutter-width);
+
+$grid-float-breakpoint: $screen-md;
+$grid-float-breakpoint-max: $screen-md;
+
+$container-width: 1080px;
+*/

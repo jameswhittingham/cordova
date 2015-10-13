@@ -1,0 +1,52 @@
+<!--<ion-view view-title="Names" class="page names">
+  <ion-content class="col-xs-12">-->
+    
+<div class="page">
+  <div class="col-xs-12">
+    <h1 class="heading">Names</h1>
+  </div>
+
+
+<!--<div class="col-xs-12">
+  <div style="height:40px; width:40px; border: solid 1px #000;" on-drag="onDrag()"></div>
+</div>
+
+
+<div class="col-xs-12">
+  <div on-drag="onDrag($event)"  on-release="onRelease($event)" id="dragger_1" class="large greenbg" ng-class="{shadowClass: doshadow==1}">drag 1</div>
+  <div on-drag="onDrag($event)"  on-release="onRelease($event)" id="dragger_2" class="large redbg" ng-class="{shadowClass: doshadow==2}">drag 2</div>
+  <div on-drag="onDrag($event)"  on-release="onRelease($event)" id="dragger_3" class="large bluebg" ng-class="{shadowClass: doshadow==3}">drag 3</div>
+
+  <div id="dragged" class="mini" ng-class="{hidden: doshadow == 0}" ng-style="draggedStyle">dragged</div>
+</div>-->
+
+  <div class="interactive-container">
+    <swipeable id="{{$index}}" ng-repeat="obj in draggableObjects" obj='obj' class='col-xs-10 col-xs-offset-1 draggable-item well'></swipeable>
+
+    <div ng-drop="true" ng-drop-success="onDropComplete1($data,$event)" class="col-xs-6 drop-area well">
+      <div class="names-container">
+        <h3>Losers</h3>
+        <div ng-repeat="obj in droppedObjects1" ng-drag="true" ng-drag-data="obj" ng-drag-success="onDragSuccess1($data,$event)" ng-center-anchor="{{centerAnchor}}">
+            {{obj.name}}
+        </div>
+      </div>
+    </div>
+
+    <div ng-drop="true" ng-drop-success="onDropComplete2($data,$event)" class="col-xs-6 drop-area well">
+      <div class="names-container">
+        <h3>Winners</h3>
+        <div ng-repeat="obj in droppedObjects2" ng-drag="true" ng-drag-data="obj" ng-drag-success="onDragSuccess2($data,$event)" ng-center-anchor="{{centerAnchor}}">
+          {{obj.name}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--  </ion-content>
+</ion-view>-->
+
+
+
+

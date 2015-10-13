@@ -1,0 +1,34 @@
+// VANILLA MIXINS
+// --------------------------------------------------
+//@import "base/mixins.less";
+
+// VANILLA BASE STYLES & LAYOUT
+// --------------------------------------------------
+//@import "base/animations.less";
+//@import "base/fonts.less";
+//@import "base/icons.less";
+//@import "base/structure.less";
+//@import "base/typography.less";
+@import "base/buttons";
+//@import "base/tables.less";
+@import "base/forms";
+//@import "base/lists.less";
+//@import "base/navigation.less";
+@import "base/vertical-center";
+//@import "base/sections.less";
+
+// VANILLA MODULES
+// --------------------------------------------------
+//@import "modules/header.less";
+//@import "modules/footer.less";
+//@import "modules/panels.less";
+//@import "modules/modals.less";
+//@import "modules/sidebar.less";
+//@import "modules/carousel.less";
+//@import "modules/video.less";
+//@import "modules/wells.less";
+@import "modules/pages";
+
+// VENDOR
+// --------------------------------------------------
+//@import "vendor/owl-carousel.less";

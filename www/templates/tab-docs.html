@@ -1,0 +1,37 @@
+<ion-view view-title="Docs" class="page">
+  <ion-content>
+    <div class="col-xs-12">
+      <h1>Docs</h1>
+
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="filterDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          {{selectedFilter || 'Filter'}}
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="filterDropdown">
+          <li><a ng-click="updateFilter('Filter')">Filter</a></li>
+          <!--<li><a ng-click="selectedFilter = 'doc'">Word</a></li>
+          <li><a ng-click="selectedFilter = 'pdf'">PDF</a></li>
+          <li><a ng-click="selectedFilter = 'excel'">Excel</a></li>
+          <li><a ng-click="selectedFilter = 'website'">Website</a></li>-->
+
+          <!--<li ng-repeat="doc in docs.docs | unique: 'docType'"><a ng-click="selectedFilter = {{doc.docType}}">{{doc.docType}}</a></li>-->
+          
+          <li ng-repeat="doc in docs.docs | unique: 'docType'"><a ng-click="updateFilter(doc.docType)">{{doc.docType}}</a></li>
+
+        </ul>
+      </div>
+
+      <div class="panel panel-default" ng-repeat="doc in docs.docs | filter:{categories:selectedFilter}">
+        <div class="panel-heading">{{doc.title}}</div>
+        <div class="panel-body">{{doc.body}}</div>
+        
+        <div class="panel-footer">
+          <a ng-click="goToLink('{{doc.url}}')" class="btn btn-link {{doc.icon}}">{{doc.title}}</a>
+        </div>
+
+      </div>
+    <div>
+
+  </ion-content>
+</ion-view>

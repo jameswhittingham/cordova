@@ -1,0 +1,15 @@
+// BOOTSTRAP VARIABLES
+// --------------------------------------------------
+@import "scss/app/vendor/bootstrap/_variables";
+
+// CUSTOM VARIABLES
+// --------------------------------------------------
+@import "scss/app/variables";
+
+// BOOTSTRAP
+// --------------------------------------------------
+@import "scss/app/vendor/_bootstrap";
+
+// CUSTOM MAIN STYLES
+// --------------------------------------------------
+@import "scss/app/main";
