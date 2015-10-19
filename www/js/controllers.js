@@ -4,6 +4,130 @@ angular.module('starter.controllers', [])
 
 })
 
+.controller('rootController', function($scope) {
+
+  $scope.user = {
+    firstName: '',
+    lastName: '',
+    phone: '',
+    image: ''
+  }
+
+  $scope.download = function() {
+
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
+      console.log("request");
+
+      fileSystem.root.getFile('data_file', {create: true, exclusive: false},
+          function(file_entry){
+              console.log("entry");
+
+              var ft = new FileTransfer()
+              ft.download("http://clients.radarsydney.com/data/docs.js", file_entry.toURL(), function(fe){
+                  console.log("downloaded");
+
+                  alert('Data downloaded!');
+
+                  fe.file(function(f){
+                      console.log("file");
+
+                      reader = new FileReader()
+                      reader.onloadend = function(ev){
+                          console.log('READ!', ev.target.result)
+                      }
+                      reader.readAsText(f)
+                  })
+              })
+          }
+      )
+    })
+  }
+
+  $scope.load = function() {
+
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
+      console.log("request");
+
+      fileSystem.root.getFile('data_file', null,
+          function(file_entry){
+            console.log("entry");
+
+            file_entry.file(function(file){
+              var reader = new FileReader();
+              reader.onloadend = function(evt) {
+                  alert('Read downloaded data');
+                  console.log(evt.target.result);
+                  $scope.docs = JSON.parse(evt.target.result);
+                  if (!$scope.$$phase) $scope.$apply()
+                  //$scope.apply();
+              };
+              reader.readAsText(file);
+            })
+
+          }
+        )
+
+    })
+  }
+
+  $scope.delete = function() {
+      console.log("delete");
+      window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
+        console.log("request");
+
+        fileSystem.root.getFile('data_file', null,
+            function(file_entry){
+              console.log("entry");
+
+              file_entry.remove(function(){
+                console.log("file removed");
+                alert('Data removed')
+
+                $scope.docs = "";
+                if (!$scope.$$phase) $scope.$apply()
+              })
+
+            }
+          )
+
+      })
+
+
+  }
+
+})
+
+
+
+.controller('SettingsCtrl', function($scope, CameraService) {
+
+  $scope.getPhoto = function() {
+    CameraService.getPicture({saveToPhotoAlbum: true}).then(function(imageURI) {
+      console.log(imageURI);
+      $scope.user.image = imageURI;
+    }, function(err) {
+      console.err(err);
+    });
+  }
+
+  $scope.getUser = function() {
+    var localuser = window.localStorage['user'];
+    console.log(localuser);
+    $scope.user = JSON.parse(localuser || '{}');
+  }
+
+  $scope.saveProfile = function() {
+    window.localStorage['user'] = JSON.stringify($scope.user);
+  }
+
+  $scope.getUser();
+})
+
+
+
+
+
+
 .controller('NamesCtrl', function($scope, Names) {
 
   $scope.droppedObjects1 = [];
@@ -27,43 +151,20 @@ angular.module('starter.controllers', [])
     $scope.$apply();
   }
 
-
-  /*$scope.droppedObjects1 = [];
-  $scope.droppedObjects2= [];
-
-  $scope.onDropComplete1=function(data,evt){
-    var index = $scope.droppedObjects1.indexOf(data);
-    var dragIndex = $scope.draggableObjects.indexOf(data);
-    if (index == -1) {
-      $scope.droppedObjects1.push(data);  
-    }
-
-    if (dragIndex > -1) {
-      $scope.draggableObjects.splice(dragIndex, 1);
-    }
-  }
-
-  $scope.onDropComplete2=function(data,evt){
-    var index = $scope.droppedObjects2.indexOf(data);
-    var dragIndex = $scope.draggableObjects.indexOf(data);
-    if (index == -1) {
-      $scope.droppedObjects2.push(data);
-    }
-
-    if (dragIndex > -1) {
-      $scope.draggableObjects.splice(dragIndex, 1);
-    }
-  }
-
-  var inArray = function(array, obj) {
-      var index = array.indexOf(obj);
-  }*/
 })
 
+
+
+
+
+
+
 .controller('DocsCtrl', function($scope, Docs) {
-  Docs.all(function(data){
-    $scope.docs = data;
-  });
+  if (!$scope.docs) {
+    Docs.all(function(data){
+      $scope.docs = data;
+    });
+  }
 
   $scope.selectedFilter = "Filter";
   $scope.updateFilter = function(val){
@@ -71,7 +172,7 @@ angular.module('starter.controllers', [])
   }
 
   $scope.goToLink = function (url) {
-    window.open(url,'_blank');
+    window.open(url,'_blank', 'location=yes');
   }
 })
 

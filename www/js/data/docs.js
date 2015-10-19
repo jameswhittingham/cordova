@@ -6,7 +6,7 @@
 		"docType": "Doc",
 		"categories": "Filter Doc",
 		"icon": "ion-document-text",
-		"url": "assets/word.docx"
+		"url": "http://www.healthlinks.net.au/content/msd/pi.cfm?product=mkpkeytr"
 	}, {
 		"id": 2,
 		"title": "PDF",
