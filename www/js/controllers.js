@@ -124,6 +124,7 @@ angular.module('starter.controllers', [])
                 fileEntry.moveTo(dataDir, newFileName, function(entry){
                    console.log("New Path: " + entry.nativeURL);
                    $scope.user.image = entry.nativeURL;
+                   if (!$scope.$$phase) $scope.$apply()
                 }, function(){
                   console.log("Copy failed");
                 });
