@@ -19,7 +19,7 @@
 		    <br/><br/>
 
 			<div class="col-xs-6">
-				<img src="{{user.image || 'img/profile.gif'}}" class="img-responsive text-center" ng-click="getPhoto()">
+				<img ng-src="{{user.image || 'img/profile.gif'}}" class="img-responsive text-center" ng-click="getPhoto()" style="width:100%; min-height:100px;">
 			</div>
 
 			<div class="col-xs-6">

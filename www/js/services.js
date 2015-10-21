@@ -16,21 +16,76 @@ angular.module('starter.services', [])
    }
 })
 
-.factory('CameraService', ['$q', function($q, $cordovaCamera) {
-
+.factory('CameraService', ['$q', function($q) {
   return {
     getPicture: function(options) {
       var q = $q.defer();
 
       navigator.camera.getPicture(function(result) {
-        // Do any magic you need
         q.resolve(result);
       }, function(err) {
         q.reject(err);
-      }, options);
+      }, { 
+        quality: 50,
+        destinationType: Camera.DestinationType.FILE_URI 
+      });
 
       return q.promise;
     }
+  }
+}])
+
+.factory('fileService', ['$q', function($q) {
+  return {
+    saveFile: function(filename, downloadlocation, callback) {
+
+      window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
+        fileSystem.root.getFile(filename, {create: true, exclusive: false},
+          function(file_entry){
+            var ft = new FileTransfer()
+            ft.download(downloadlocation, file_entry.toURL(), function(fe){
+              fe.file(function(f){
+                alert(callback);
+
+                reader = new FileReader()
+                
+                reader.onloadend = function(ev){
+                  console.log('READ!', ev.target.result)
+                }
+                reader.readAsText(f)
+              })
+            })
+          }
+        )
+      })
+    },
+    getFile: function(filename, fileLocation, callback) {
+
+      window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
+        fileSystem.root.getFile('data_file', null,
+            function(file_entry){
+
+              file_entry.file(function(file){
+                var reader = new FileReader();
+                reader.onloadend = function(evt) {
+
+                    alert(callback);
+
+                    console.log(evt.target.result);
+                    //$scope.docs = JSON.parse(evt.target.result);
+                    //if (!$scope.$$phase) $scope.$apply()
+                    //$scope.apply();
+                };
+                reader.readAsDataURL(file);
+              })
+
+            }
+          )
+
+      })
+
+    }
+
   }
 }]);
 

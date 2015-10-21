@@ -4,7 +4,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('rootController', function($scope) {
+.controller('rootController', function($scope, fileService) {
 
   $scope.user = {
     firstName: '',
@@ -14,6 +14,10 @@ angular.module('starter.controllers', [])
   }
 
   $scope.download = function() {
+    fileService.saveFile('data_file', 'http://clients.radarsydney.com/data/docs.js', 'Data file downloaded!');
+  }
+
+  /*$scope.download = function() {
 
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
       console.log("request");
@@ -41,7 +45,7 @@ angular.module('starter.controllers', [])
           }
       )
     })
-  }
+  }*/
 
   $scope.load = function() {
 
@@ -102,9 +106,35 @@ angular.module('starter.controllers', [])
 .controller('SettingsCtrl', function($scope, CameraService) {
 
   $scope.getPhoto = function() {
-    CameraService.getPicture({saveToPhotoAlbum: true}).then(function(imageURI) {
+    CameraService.getPicture().then(function(imageURI) {
       console.log(imageURI);
-      $scope.user.image = imageURI;
+
+
+        var gotFileEntry = function(fileEntry) {
+          var gotFileSystem = function(fileSystem) {
+
+              fileSystem.root.getDirectory("localDocs", {
+                  create : true
+              }, function(dataDir) {
+                var d = new Date();
+                var n = d.getTime();
+
+                var newFileName = n + ".jpg";
+
+                fileEntry.moveTo(dataDir, newFileName, function(entry){
+                   console.log("New Path: " + entry.nativeURL);
+                   $scope.user.image = entry.nativeURL;
+                }, function(){
+                  console.log("Copy failed");
+                });
+
+              });
+          }
+          window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFileSystem);
+        }
+        window.resolveLocalFileSystemURL(imageURI, gotFileEntry);
+
+
     }, function(err) {
       console.err(err);
     });
